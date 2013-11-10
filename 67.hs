@@ -21,5 +21,11 @@ NOTE: This is a much more difficult version of Problem 18. It is not possible to
 main = do
   contents <- readFile "triangle.txt"
   let
-    nums = map (map read) . map words . lines $ contents :: [[Int]]
-  print nums
+    triangle = map (map read) . map words . lines $ contents :: [[Int]]
+    q67 acc (-1) = head acc 
+    q67 acc n = q67
+                [(triangle !! n) !! x + max (acc !! x) (acc !! (x+1)) |
+                 x <- [0..length (triangle !! n) - 1]]
+                (n-1)
+  
+  print $ q67 (triangle !! 99) 98

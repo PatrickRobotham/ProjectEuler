@@ -30,4 +30,17 @@ Find the maximum total from top to bottom of the triangle below:
 NOTE: As there are only 16384 routes, it is possible to solve this problem by trying every route. However, Problem 67, is the same challenge with a triangle containing one-hundred rows; it cannot be solved by brute force, and requires a clever method! ;o)
 -}
 
+-- We use our code from problem 67
+
+main = do
+  contents <- readFile "18.txt"
+  let
+    triangle = map (map read) . map words . lines $ contents :: [[Int]]
+    q67 acc (-1) = head acc 
+    q67 acc n = q67
+                [(triangle !! n) !! x + max (acc !! x) (acc !! (x+1)) |
+                 x <- [0..length (triangle !! n) - 1]]
+                (n-1)
+  
+  print $ q67 (triangle !! (length triangle - 1)) (length triangle - 2)
 
