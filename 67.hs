@@ -28,4 +28,4 @@ main = do
                  x <- [0..length (triangle !! n) - 1]]
                 (n-1)
   
-  print $ q67 (triangle !! 99) 98
+  print $ q67 (triangle !! (length triangle - 1)) (length triangle - 2)
